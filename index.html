@@ -1,271 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>The Street Foods™</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>THE STREET FOODS</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
-    <style>
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-        body {
-          font-family: 'Inter', sans-serif;
-          background: #f8f8f8;
-          color: #111;
-        }
+    body {
+      background: #f8f8f8;
+      color: #222;
+    }
 
-        /* HERO */
-        .hero {
-          height: 90vh;
-          background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                      url('https://images.unsplash.com/photo-1504674900247-0877df9cc836');
-          background-size: cover;
-          background-position: center;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          color: white;
-          padding: 20px;
-        }
+    /* HERO */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('images/bhaji.jpg') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
 
-        .hero h1 {
-          font-family: 'Poppins', sans-serif;
-          font-size: 3rem;
-          font-weight: 800;
-        }
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+    }
 
-        .hero p {
-          margin-top: 10px;
-          font-size: 1.2rem;
-          opacity: 0.9;
-        }
+    .hero p {
+      margin-top: 10px;
+      font-size: 18px;
+      opacity: 0.9;
+    }
 
-        .hero button {
-          margin-top: 20px;
-          padding: 14px 28px;
-          border: none;
-          border-radius: 10px;
-          background: linear-gradient(135deg, #ff6a00, #ff3d00);
-          color: white;
-          font-size: 16px;
-          cursor: pointer;
-          box-shadow: 0 6px 20px rgba(255,90,0,0.4);
-          transition: 0.3s;
-        }
+    .btn {
+      margin-top: 20px;
+      padding: 14px 28px;
+      background: #ff5a2c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
 
-        .hero button:hover {
-          transform: scale(1.05);
-        }
+    /* SECTION */
+    .section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
 
-        /* SECTION */
-        .section {
-          padding: 50px 20px;
-        }
+    .section h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-        .section h2 {
-          text-align: center;
-          font-family: 'Poppins';
-          font-size: 2rem;
-          margin-bottom: 10px;
-        }
+    .section p {
+      color: #666;
+      margin-bottom: 40px;
+    }
 
-        .section p {
-          text-align: center;
-          margin-bottom: 30px;
-          color: #555;
-        }
+    /* CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
 
-        /* CARDS */
-        .cards {
-          display: grid;
-          gap: 25px;
-          max-width: 1000px;
-          margin: auto;
-        }
+    .card {
+      background: white;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
 
-        .card {
-          background: white;
-          border-radius: 16px;
-          overflow: hidden;
-          box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-          transition: 0.3s;
-        }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    }
 
-        .card:hover {
-          transform: translateY(-5px);
-        }
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
 
-        .card img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-        }
+    .card-content {
+      padding: 20px;
+      text-align: left;
+    }
 
-        .card-content {
-          padding: 20px;
-        }
+    .card h3 {
+      margin-bottom: 10px;
+    }
 
-        .card h3 {
-          font-family: 'Poppins';
-          margin-bottom: 5px;
-        }
+    .card p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 15px;
+    }
 
-        .tag {
-          font-size: 13px;
-          color: #ff5a1f;
-          font-weight: 600;
-          margin-bottom: 10px;
-        }
+    .actions a {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 5px;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+    }
 
-        .desc {
-          font-size: 14px;
-          color: #666;
-          margin-bottom: 10px;
-        }
+    .whatsapp {
+      background: #25D366;
+      color: white;
+    }
 
-        .buttons {
-          display: flex;
-          gap: 10px;
-          margin-top: 10px;
-        }
+    .map {
+      background: #eee;
+      color: #333;
+    }
 
-        .btn {
-          flex: 1;
-          padding: 10px;
-          border-radius: 8px;
-          border: none;
-          cursor: pointer;
-        }
+    /* FLOAT BUTTON */
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff5a2c;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
 
-        .primary {
-          background: linear-gradient(135deg, #ff6a00, #ff3d00);
-          color: white;
-        }
-
-        .secondary {
-          background: #eee;
-        }
-
-        /* Sticky button */
-        .sticky {
-          position: fixed;
-          bottom: 0;
-          width: 100%;
-          background: #ff3d00;
-          color: white;
-          text-align: center;
-          padding: 15px;
-          font-weight: bold;
-        }
-
-        /* MOBILE */
-        @media (max-width: 600px) {
-          .hero h1 {
-            font-size: 2.2rem;
-          }
-        }
-    </style>
+    /* MOBILE */
+    @media(max-width:600px){
+      .hero h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
+  <!-- HERO -->
+  <section class="hero">
     <div>
-        <h1>THE STREET FOODS™</h1>
-        <p>3 Cravings. 1 Destination.</p>
-        <button onclick="scrollToOutlets()">Explore Outlets</button>
+      <h1>THE STREET FOODS</h1>
+      <p>3 Cravings. 1 Destination.</p>
+      <a href="#outlets" class="btn">Explore Outlets</a>
     </div>
-</section>
+  </section>
 
-<!-- OUTLETS -->
-<section class="section" id="outlets">
+  <!-- OUTLETS -->
+  <section class="section" id="outlets">
     <h2>Our Outlets</h2>
-    <p>Choose your craving</p>
+    <p>Each outlet brings you a unique experience</p>
 
-    <div class="cards">
+    <div class="grid">
 
-        <!-- Bhaji Pav -->
-        <div class="card">
-            <img src="https://unsplash.com/photos/a-plate-of-food-that-includes-bread-salsa-and-bread-rolls-jZaYAd6CqOo">
-            <div class="card-content">
-                <h3>Bhaji Pav</h3>
-                <div class="tag">Street Food • Burgers • Momos</div>
-                <div class="desc">
-                    Pav Bhaji, Sandwiches, Burgers, Momos, Fries & more.
-                </div>
-
-                <div class="buttons">
-                    <button class="btn primary" onclick="order('Bhaji Pav', '918409067309')">Order</button>
-                    <button class="btn secondary" onclick="openMap('https://share.google/gjvX9seNaSlevF1n9')">Map</button>
-                </div>
-            </div>
+      <!-- Bhaji Pav -->
+      <div class="card">
+        <img src="images/bhaji.jpg" alt="Bhaji Pav">
+        <div class="card-content">
+          <h3>Bhaji Pav</h3>
+          <p>Pav Bhaji, Sandwiches, Burgers, Momos, Cold Coffee, Fries & Mocktails</p>
+          <div class="actions">
+            <a class="whatsapp" href="https://wa.me/918409067309">Order</a>
+            <a class="map" href="https://share.google/gjvX9seNaSlevF1n9">Map</a>
+          </div>
         </div>
+      </div>
 
-        <!-- Baithak -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085">
-            <div class="card-content">
-                <h3>Baithak</h3>
-                <div class="tag">Cafe • Tea • Coffee</div>
-                <div class="desc">
-                    Tea, Coffee, Bun Maska, Maggie, Omelette & more.
-                </div>
-
-                <div class="buttons">
-                    <button class="btn primary" onclick="order('Baithak', '918409067309')">Order</button>
-                    <button class="btn secondary" onclick="openMap('https://share.google/8egLSYewcyZuOjMww')">Map</button>
-                </div>
-            </div>
+      <!-- Baithak -->
+      <div class="card">
+        <img src="images/baithak.jpg" alt="Baithak">
+        <div class="card-content">
+          <h3>Baithak</h3>
+          <p>Tea, Coffee, Bun Maska, Sandwiches, Maggie, Omelette & Beverages</p>
+          <div class="actions">
+            <a class="whatsapp" href="https://wa.me/918409067309">Order</a>
+            <a class="map" href="https://share.google/8egLSYewcyZuOjMww">Map</a>
+          </div>
         </div>
+      </div>
 
-        <!-- China -->
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c">
-            <div class="card-content">
-                <h3>China Ka Maal</h3>
-                <div class="tag">Chinese • Rolls • Biryani</div>
-                <div class="desc">
-                    Chinese, Chili dishes, Biryani, Kathi Rolls.
-                </div>
-
-                <div class="buttons">
-                    <button class="btn primary" onclick="order('China Ka Maal', '917033182192')">Order</button>
-                    <button class="btn secondary" onclick="openMap('https://share.google/0GJ7uHHTRGUVC8TvQ')">Map</button>
-                </div>
-            </div>
+      <!-- China Ka Maal -->
+      <div class="card">
+        <img src="images/china.jpg" alt="China Ka Maal">
+        <div class="card-content">
+          <h3>China Ka Maal</h3>
+          <p>Chinese, Chilli, Biryani & Kathi Rolls</p>
+          <div class="actions">
+            <a class="whatsapp" href="https://wa.me/917033182192">Order</a>
+            <a class="map" href="https://share.google/0GJ7uHHTRGUVC8TvQ">Map</a>
+          </div>
         </div>
+      </div>
 
     </div>
-</section>
+  </section>
 
-<!-- Sticky CTA -->
-<div class="sticky" onclick="order('The Street Foods', '918409067309')">
-    📲 Order Now on WhatsApp
-</div>
-
-<script>
-    function scrollToOutlets() {
-      document.getElementById("outlets").scrollIntoView({ behavior: "smooth" });
-    }
-
-    function order(outlet, number) {
-      const msg = `Hi, I want to order from ${outlet}`;
-      window.open(`https://wa.me/${number}?text=${encodeURIComponent(msg)}`);
-    }
-
-    function openMap(link) {
-      window.open(link);
-    }
-</script>
+  <!-- FLOATING BUTTON -->
+  <a href="https://wa.me/918409067309" class="floating-btn">
+    Order Now
+  </a>
 
 </body>
 </html>
