@@ -3,6 +3,10 @@ const outletConfig = {
     outletName: 'Bhaji Pav',
     phone: '918409067309',
     mapUrl: 'https://share.google/gjvX9seNaSlevF1n9',
+    hours: [
+      { open: '08:00', close: '11:00' },
+      { open: '16:00', close: '23:00' }
+    ],
     swiggyUrl: '#',
     zomatoUrl: 'https://www.zomato.com/muzaffarpur/bhaji-pav-tsf-muzaffarpur-locality-muzaffarpur-city/order',
     categories: [
@@ -51,6 +55,10 @@ const outletConfig = {
     outletName: 'Baithak',
     phone: '917780025877',
     mapUrl: 'https://share.google/8egLSYewcyZuOjMww',
+    hours: [
+      { open: '07:00', close: '10:00' },
+      { open: '15:00', close: '23:00' }
+    ],
     swiggyUrl: '#',
     zomatoUrl: 'http://zoma.to/r/22311302',
     categories: [
@@ -103,6 +111,9 @@ const outletConfig = {
     outletName: 'China Ka Maal',
     phone: '917033182192',
     mapUrl: 'https://share.google/0GJ7uHHTRGUVC8TvQ',
+    hours: [
+      { open: '12:00', close: '23:00' }
+    ],
     swiggyUrl: 'https://www.swiggy.com/city/muzaffarpur/china-ka-maal-muz-muzaffarpur-city-rest1356681',
     zomatoUrl: '#',
     categories: [
@@ -238,6 +249,7 @@ if (!config) {
     whatsapp: document.getElementById('outlet-whatsapp'),
     swiggy: document.getElementById('outlet-swiggy'),
     zomato: document.getElementById('outlet-zomato'),
+    menuTools: document.getElementById('menu-tools'),
     menuList: document.getElementById('menu-list'),
     cartCount: document.getElementById('cart-count'),
     cartTotal: document.getElementById('cart-total'),
@@ -262,11 +274,65 @@ if (!config) {
   );
   const selectedVariants = new Map();
   let dietFilter = 'all';
+  let searchTerm = '';
 
   function getItemDiet(item) {
     const name = item.name.toLowerCase();
     const isNonVeg = /\b(chicken|egg|anda|omelette)\b/.test(name);
     return isNonVeg ? 'non-veg' : 'veg';
+  }
+
+  function createOutletStatus() {
+    if (!config.hours) return;
+
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Kolkata',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    }).formatToParts(now);
+    const hour = Number(parts.find(part => part.type === 'hour')?.value || 0);
+    const minute = Number(parts.find(part => part.type === 'minute')?.value || 0);
+    const currentMinutes = (hour * 60) + minute;
+
+    const ranges = config.hours
+      .map(range => ({
+        ...range,
+        openMinutes: getMinutes(range.open),
+        closeMinutes: getMinutes(range.close)
+      }))
+      .sort((a, b) => a.openMinutes - b.openMinutes);
+
+    const activeRange = ranges.find(range => currentMinutes >= range.openMinutes && currentMinutes < range.closeMinutes);
+    const nextRange = ranges.find(range => currentMinutes < range.openMinutes) || ranges[0];
+    const isOpen = Boolean(activeRange);
+    const label = isOpen
+      ? `Open till ${formatTime(activeRange.close)}`
+      : `Opens at ${formatTime(nextRange.open)}`;
+
+    const list = document.querySelector('.contact-list');
+    if (!list) return;
+
+    const statusItem = document.createElement('li');
+    statusItem.innerHTML = `
+      <strong>Status:</strong>
+      <span class="outlet-status ${isOpen ? 'open' : 'closed'}">${isOpen ? 'Open' : 'Closed'}</span>
+      <span class="status-detail">${label} · Open everyday</span>
+    `;
+    list.prepend(statusItem);
+  }
+
+  function formatTime(value) {
+    const [hour, minute] = value.split(':').map(Number);
+    const suffix = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = ((hour + 11) % 12) + 1;
+    return `${displayHour}:${String(minute).padStart(2, '0')} ${suffix}`;
+  }
+
+  function getMinutes(value) {
+    const [hour, minute] = value.split(':').map(Number);
+    return (hour * 60) + minute;
   }
 
   function getPortionInfo(item) {
@@ -331,6 +397,22 @@ if (!config) {
     return dietFilter === 'all' || product.diet === dietFilter;
   }
 
+  function productMatchesSearch(product) {
+    if (!searchTerm.trim()) return true;
+
+    const query = searchTerm.trim().toLowerCase();
+    const haystacks = [product.name, product.desc];
+    if (product.variants) {
+      product.variants.forEach(variant => {
+        haystacks.push(variant.item.name, variant.item.desc);
+      });
+    } else if (product.item) {
+      haystacks.push(product.item.name, product.item.desc);
+    }
+
+    return haystacks.some(value => value?.toLowerCase().includes(query));
+  }
+
   function createDietFilter() {
     if (outletKey === 'bhaji-pav') {
       const badge = document.createElement('div');
@@ -358,6 +440,50 @@ if (!config) {
       </button>
     `).join('');
     return filter;
+  }
+
+  function createMenuTools() {
+    const tools = document.createElement('div');
+    tools.className = 'menu-tools';
+    tools.appendChild(createDietFilter());
+
+    const search = document.createElement('label');
+    search.className = 'menu-search';
+    search.innerHTML = `
+      <input
+        type="search"
+        id="menu-search-input"
+        placeholder="Search within menu"
+        value="${searchTerm.replace(/"/g, '&quot;')}"
+        autocomplete="off"
+      >
+    `;
+    tools.appendChild(search);
+    return tools;
+  }
+
+  function renderMenuTools() {
+    if (!els.menuTools || els.menuTools.childElementCount) return;
+    els.menuTools.appendChild(createMenuTools());
+  }
+
+  function syncMenuTools() {
+    if (!els.menuTools) return;
+
+    els.menuTools.querySelectorAll('[data-action="diet-filter"]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.filter === dietFilter);
+    });
+
+    const searchInput = els.menuTools.querySelector('#menu-search-input');
+    if (searchInput && searchInput.value !== searchTerm) {
+      searchInput.value = searchTerm;
+    }
+  }
+
+  function getFilteredProducts(items) {
+    return createMenuProducts(items)
+      .filter(productMatchesDiet)
+      .filter(productMatchesSearch);
   }
 
   function getCartTotals() {
@@ -395,6 +521,7 @@ if (!config) {
     const item = getSelectedItem(product);
     const qty = cart.get(item.id)?.qty || 0;
     const popular = product.popular || item.popular;
+    const diet = product.diet || getItemDiet(item);
     const variantOptions = product.variants ? `
       <div class="variant-options" aria-label="Choose size for ${product.name}">
         ${product.variants.map(variant => {
@@ -423,7 +550,10 @@ if (!config) {
         ${popular ? '<span class="popular-badge">Popular</span>' : ''}
       </div>
       <div class="menu-meta">
-        <h3>${product.name}</h3>
+        <div class="menu-title-row">
+          <h3>${product.name}</h3>
+          <span class="diet-pill ${diet === 'veg' ? 'veg' : 'non-veg'}">${diet === 'veg' ? 'Veg' : 'Non-Veg'}</span>
+        </div>
         <p>${item.desc}</p>
         ${variantOptions}
         <div class="menu-bottom">
@@ -440,14 +570,33 @@ if (!config) {
   }
 
   function renderMenu() {
+    renderMenuTools();
+    syncMenuTools();
     els.menuList.innerHTML = '';
-    els.menuList.appendChild(createDietFilter());
     let renderedProducts = 0;
+    const recommended = getFilteredProducts(config.menu).filter(product => product.popular);
+
+    if (recommended.length) {
+      renderedProducts += recommended.length;
+      const recommendedSection = document.createElement('section');
+      recommendedSection.className = 'menu-category recommended-category';
+      recommendedSection.innerHTML = `
+        <div class="category-head">
+          <h3>Recommended</h3>
+          <span>${recommended.length} items</span>
+        </div>
+        <div class="category-grid"></div>
+      `;
+
+      const recommendedGrid = recommendedSection.querySelector('.category-grid');
+      recommended.forEach(product => recommendedGrid.appendChild(createMenuItem(product)));
+      els.menuList.appendChild(recommendedSection);
+    }
 
     if (config.categories?.length) {
       config.categories.forEach(category => {
         const items = config.menu.filter(item => item.category === category.id);
-        const products = createMenuProducts(items).filter(productMatchesDiet);
+        const products = getFilteredProducts(items);
         if (!products.length) return;
         renderedProducts += products.length;
 
@@ -471,7 +620,7 @@ if (!config) {
       return;
     }
 
-    const products = createMenuProducts(config.menu).filter(productMatchesDiet);
+    const products = getFilteredProducts(config.menu);
     products.forEach(product => {
       els.menuList.appendChild(createMenuItem(product));
     });
@@ -505,7 +654,7 @@ if (!config) {
     renderCartSummary();
   }
 
-  els.menuList.addEventListener('click', (e) => {
+  els.menuTools?.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
 
@@ -514,6 +663,11 @@ if (!config) {
       renderMenu();
       return;
     }
+  });
+
+  els.menuList.addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
 
     if (btn.dataset.action === 'variant') {
       selectedVariants.set(btn.dataset.productId, btn.dataset.id);
@@ -522,6 +676,12 @@ if (!config) {
     }
 
     updateQty(btn.dataset.id, btn.dataset.action === 'dec' ? -1 : 1);
+  });
+
+  els.menuTools?.addEventListener('input', (e) => {
+    if (e.target.id !== 'menu-search-input') return;
+    searchTerm = e.target.value;
+    renderMenu();
   });
 
   els.viewCart.addEventListener('click', () => {
@@ -534,6 +694,8 @@ if (!config) {
     window.location.href = `cart.html?outlet=${encodeURIComponent(outletKey)}`;
   });
 
+  createOutletStatus();
+  renderMenuTools();
   saveCart();
   renderMenu();
   renderCartSummary();
