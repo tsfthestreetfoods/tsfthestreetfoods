@@ -3,7 +3,7 @@ const outletConfig = {
     outletName: 'Bhaji Pav',
     phone: '918409067309',
     mapUrl: 'https://share.google/gjvX9seNaSlevF1n9',
-    swiggyUrl: 'https://www.swiggy.com/city/muzaffarpur/china-ka-maal-muz-muzaffarpur-city-rest1356681',
+    swiggyUrl: '#',
     zomatoUrl: '#',
     categories: [
       { id: 'pav-bhaji', label: 'Pav Bhaji' },
