@@ -4,7 +4,7 @@ const outletConfig = {
     phone: '918409067309',
     mapUrl: 'https://share.google/gjvX9seNaSlevF1n9',
     swiggyUrl: '#',
-    zomatoUrl: 'http://zoma.to/r/22311302',
+    zomatoUrl: 'https://zoma.to/r/22311302',
     categories: [
       { id: 'pav-bhaji', label: 'Pav Bhaji' },
       { id: 'burgers', label: 'Burgers' },
