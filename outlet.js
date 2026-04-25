@@ -260,6 +260,105 @@ if (!config) {
       return [item.id, { ...currentItem, qty: item.qty }];
     }) || []
   );
+  const selectedVariants = new Map();
+  let dietFilter = 'all';
+
+  function getItemDiet(item) {
+    const name = item.name.toLowerCase();
+    const isNonVeg = /\b(chicken|egg|anda|omelette)\b/.test(name);
+    return isNonVeg ? 'non-veg' : 'veg';
+  }
+
+  function getPortionInfo(item) {
+    const match = item.name.match(/\s+(Half|Full)$/i);
+    if (!match) return null;
+
+    return {
+      label: match[1][0].toUpperCase() + match[1].slice(1).toLowerCase(),
+      baseName: item.name.replace(/\s+(Half|Full)$/i, '')
+    };
+  }
+
+  function getProductId(category, baseName) {
+    return `${category}-${baseName.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+  }
+
+  function createMenuProducts(items) {
+    const groups = new Map();
+
+    items.forEach(item => {
+      const portion = getPortionInfo(item);
+      if (!portion) return;
+
+      const key = `${item.category}|${portion.baseName.toLowerCase()}`;
+      const group = groups.get(key) || {
+        id: getProductId(item.category, portion.baseName),
+        category: item.category,
+        name: portion.baseName,
+        desc: item.desc,
+        diet: getItemDiet(item),
+        variants: []
+      };
+      group.variants.push({ label: portion.label, item });
+      group.popular = group.popular || item.popular;
+      if (getItemDiet(item) === 'non-veg') group.diet = 'non-veg';
+      groups.set(key, group);
+    });
+
+    const usedGroups = new Set();
+    return items.reduce((products, item) => {
+      const portion = getPortionInfo(item);
+      const key = portion ? `${item.category}|${portion.baseName.toLowerCase()}` : null;
+      const group = key ? groups.get(key) : null;
+      const hasHalfFullPair = group?.variants.some(variant => variant.label === 'Half') &&
+        group?.variants.some(variant => variant.label === 'Full');
+
+      if (!portion || !hasHalfFullPair) {
+        products.push({ id: item.id, name: item.name, desc: item.desc, diet: getItemDiet(item), item });
+        return products;
+      }
+
+      if (usedGroups.has(key)) return products;
+
+      usedGroups.add(key);
+      group.variants.sort((a, b) => (a.label === 'Half' ? 0 : 1) - (b.label === 'Half' ? 0 : 1));
+      products.push(group);
+      return products;
+    }, []);
+  }
+
+  function productMatchesDiet(product) {
+    return dietFilter === 'all' || product.diet === dietFilter;
+  }
+
+  function createDietFilter() {
+    if (outletKey === 'bhaji-pav') {
+      const badge = document.createElement('div');
+      badge.className = 'pure-veg-badge';
+      badge.innerHTML = '<span aria-hidden="true"></span><strong>Pure Veg Restaurant</strong>';
+      return badge;
+    }
+
+    const options = [
+      { id: 'all', label: 'All' },
+      { id: 'veg', label: 'Veg' },
+      { id: 'non-veg', label: 'Non-Veg' }
+    ];
+    const filter = document.createElement('div');
+    filter.className = 'diet-filter';
+    filter.setAttribute('aria-label', 'Filter menu by food type');
+    filter.innerHTML = options.map(option => `
+      <button
+        type="button"
+        class="diet-filter-btn${dietFilter === option.id ? ' active' : ''}"
+        data-action="diet-filter"
+        data-filter="${option.id}"
+      >
+        ${option.label}
+      </button>
+    `).join('');
+    return filter;
+  }
 
   function getCartTotals() {
     let total = 0;
@@ -281,18 +380,52 @@ if (!config) {
     }));
   }
 
-  function createMenuItem(item) {
+  function getSelectedItem(product) {
+    if (!product.variants) return product.item;
+
+    const selectedId = selectedVariants.get(product.id);
+    const selectedVariant = product.variants.find(variant => variant.item.id === selectedId);
+    if (selectedVariant) return selectedVariant.item;
+
+    const cartVariant = product.variants.find(variant => cart.has(variant.item.id));
+    return (cartVariant || product.variants[0]).item;
+  }
+
+  function createMenuItem(product) {
+    const item = getSelectedItem(product);
     const qty = cart.get(item.id)?.qty || 0;
+    const popular = product.popular || item.popular;
+    const variantOptions = product.variants ? `
+      <div class="variant-options" aria-label="Choose size for ${product.name}">
+        ${product.variants.map(variant => {
+          const variantQty = cart.get(variant.item.id)?.qty || 0;
+          return `
+          <button
+            type="button"
+            class="variant-option${variant.item.id === item.id ? ' active' : ''}${variantQty ? ' in-cart' : ''}"
+            data-action="variant"
+            data-product-id="${product.id}"
+            data-id="${variant.item.id}"
+          >
+            <span class="variant-label">${variant.label}</span>
+            <strong>${rupee}${variant.item.price}</strong>
+            ${variantQty ? `<span class="variant-qty">${variantQty}</span>` : ''}
+          </button>
+        `;
+        }).join('')}
+      </div>
+    ` : '';
     const row = document.createElement('article');
-    row.className = `menu-item${item.popular ? ' popular-item' : ''}`;
+    row.className = `menu-item${popular ? ' popular-item' : ''}`;
     row.innerHTML = `
       <div class="menu-image-wrap">
         <img src="${item.image || 'images/hero.png'}" alt="${item.name}">
-        ${item.popular ? '<span class="popular-badge">Popular</span>' : ''}
+        ${popular ? '<span class="popular-badge">Popular</span>' : ''}
       </div>
       <div class="menu-meta">
-        <h3>${item.name}</h3>
+        <h3>${product.name}</h3>
         <p>${item.desc}</p>
+        ${variantOptions}
         <div class="menu-bottom">
           <span class="price">${rupee}${item.price}</span>
           <div class="item-actions">
@@ -308,32 +441,43 @@ if (!config) {
 
   function renderMenu() {
     els.menuList.innerHTML = '';
+    els.menuList.appendChild(createDietFilter());
+    let renderedProducts = 0;
 
     if (config.categories?.length) {
       config.categories.forEach(category => {
         const items = config.menu.filter(item => item.category === category.id);
-        if (!items.length) return;
+        const products = createMenuProducts(items).filter(productMatchesDiet);
+        if (!products.length) return;
+        renderedProducts += products.length;
 
         const section = document.createElement('section');
         section.className = 'menu-category';
         section.innerHTML = `
           <div class="category-head">
             <h3>${category.label}</h3>
-            <span>${items.length} items</span>
+            <span>${products.length} items</span>
           </div>
           <div class="category-grid"></div>
         `;
 
         const grid = section.querySelector('.category-grid');
-        items.forEach(item => grid.appendChild(createMenuItem(item)));
+        products.forEach(product => grid.appendChild(createMenuItem(product)));
         els.menuList.appendChild(section);
       });
+      if (!renderedProducts) {
+        els.menuList.insertAdjacentHTML('beforeend', '<p class="empty menu-empty">No items found for this filter.</p>');
+      }
       return;
     }
 
-    config.menu.forEach(item => {
-      els.menuList.appendChild(createMenuItem(item));
+    const products = createMenuProducts(config.menu).filter(productMatchesDiet);
+    products.forEach(product => {
+      els.menuList.appendChild(createMenuItem(product));
     });
+    if (!products.length) {
+      els.menuList.insertAdjacentHTML('beforeend', '<p class="empty menu-empty">No items found for this filter.</p>');
+    }
   }
 
   function renderCartSummary() {
@@ -364,6 +508,19 @@ if (!config) {
   els.menuList.addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
+
+    if (btn.dataset.action === 'diet-filter') {
+      dietFilter = btn.dataset.filter;
+      renderMenu();
+      return;
+    }
+
+    if (btn.dataset.action === 'variant') {
+      selectedVariants.set(btn.dataset.productId, btn.dataset.id);
+      renderMenu();
+      return;
+    }
+
     updateQty(btn.dataset.id, btn.dataset.action === 'dec' ? -1 : 1);
   });
 
