@@ -4,7 +4,7 @@ const outletConfig = {
     phone: '918409067309',
     mapUrl: 'https://share.google/gjvX9seNaSlevF1n9',
     swiggyUrl: '#',
-    zomatoUrl: 'https://zoma.to/r/22311302',
+    zomatoUrl: 'https://www.zomato.com/muzaffarpur/bhaji-pav-tsf-muzaffarpur-locality-muzaffarpur-city/order',
     categories: [
       { id: 'pav-bhaji', label: 'Pav Bhaji' },
       { id: 'burgers', label: 'Burgers' },
