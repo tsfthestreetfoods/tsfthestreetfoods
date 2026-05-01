@@ -7,7 +7,7 @@ const outletConfig = {
       { open: '08:00', close: '11:00' },
       { open: '16:00', close: '23:00' }
     ],
-    swiggyUrl: '#',
+    swiggyUrl: 'https://www.swiggy.com/city/muzaffarpur/bhaji-pav-muz-muzaffarpur-city-rest1372209',
     zomatoUrl: 'https://www.zomato.com/muzaffarpur/bhaji-pav-tsf-muzaffarpur-locality-muzaffarpur-city/order',
     categories: [
       { id: 'pav-bhaji', label: 'Pav Bhaji' },
@@ -59,8 +59,8 @@ const outletConfig = {
       { open: '07:00', close: '10:00' },
       { open: '15:00', close: '23:00' }
     ],
-    swiggyUrl: '#',
-    zomatoUrl: 'http://zoma.to/r/22311302',
+    swiggyUrl: 'https://www.swiggy.com/city/muzaffarpur/bhaji-pav-muz-muzaffarpur-city-rest1372209',
+    zomatoUrl: 'https://www.zomato.com/muzaffarpur/bhaji-pav-tsf-muzaffarpur-locality-muzaffarpur-city/order',
     categories: [
       { id: 'chai', label: 'Chai' },
       { id: 'coffee', label: 'Coffee' },
@@ -115,7 +115,7 @@ const outletConfig = {
       { open: '12:00', close: '23:00' }
     ],
     swiggyUrl: 'https://www.swiggy.com/city/muzaffarpur/china-ka-maal-muz-muzaffarpur-city-rest1356681',
-    zomatoUrl: '#',
+    zomatoUrl: 'https://www.zomato.com/muzaffarpur/tsf-the-street-foods-muzaffarpur-locality-muzaffarpur-city/order',
     categories: [
       { id: 'soup', label: 'Soup' },
       { id: 'fried-rice', label: 'Fried Rice' },

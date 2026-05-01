@@ -54,6 +54,22 @@ a { text-decoration: none; color: inherit; }
 .hero-card p { color: var(--muted); margin-bottom: 12px; }
 .contact-list { list-style: none; display: grid; gap: 7px; margin: 12px 0 18px; }
 .pill-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.platform-note {
+  margin-top: 12px;
+  display: inline-block;
+  padding: 10px 14px;
+  border: 1px solid rgba(202, 162, 74, .45);
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 248, 220, .95), rgba(244, 234, 213, .92));
+  color: #7a5816;
+  font-size: .84rem;
+  font-weight: 700;
+  line-height: 1.5;
+  box-shadow: 0 0 0 1px rgba(255, 236, 179, .55), 0 0 18px rgba(202, 162, 74, .28), 0 10px 24px rgba(154, 119, 44, .14);
+}
+.platform-note-secondary {
+  margin-top: 10px;
+}
 .pill {
   border-radius: 999px;
   padding: 9px 14px;
@@ -61,7 +77,22 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid var(--line);
   background: #fffaf0;
 }
-.pill.primary { background: var(--brand); color: #1b1712; border-color: transparent; }
+#outlet-whatsapp,
+.pill.primary {
+  background: #25d366;
+  color: #fff;
+  border-color: transparent;
+}
+#outlet-swiggy {
+  background: #fc8019;
+  color: #fff;
+  border-color: transparent;
+}
+#outlet-zomato {
+  background: #e23744;
+  color: #fff;
+  border-color: transparent;
+}
 
 .content-grid {
   display: grid;
