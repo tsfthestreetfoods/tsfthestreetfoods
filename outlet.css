@@ -77,12 +77,12 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid var(--line);
   background: #fffaf0;
 }
-#outlet-whatsapp,
-.pill.primary {
+#outlet-whatsapp {
   background: #25d366;
   color: #fff;
   border-color: transparent;
 }
+.pill.primary { background: var(--brand); color: #1b1712; border-color: transparent; }
 #outlet-swiggy {
   background: #fc8019;
   color: #fff;
