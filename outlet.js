@@ -10,45 +10,72 @@ const outletConfig = {
     swiggyUrl: 'https://www.swiggy.com/city/muzaffarpur/bhaji-pav-muz-muzaffarpur-city-rest1372209',
     zomatoUrl: 'https://www.zomato.com/muzaffarpur/bhaji-pav-tsf-muzaffarpur-locality-muzaffarpur-city/order',
     categories: [
-      { id: 'pav-bhaji', label: 'Pav Bhaji' },
-      { id: 'burgers', label: 'Burgers' },
-      { id: 'fries', label: 'Fries' },
-      { id: 'sandwiches', label: 'Sandwiches' },
-      { id: 'snacks', label: 'Snacks' },
-      { id: 'dosa', label: 'Benne Dosa' },
-      { id: 'drinks', label: 'Drinks' }
+      {"id": "pav-bhaji", "label": "Pav Bhaji"},
+      {"id": "burgers", "label": "Burgers"},
+      {"id": "fries", "label": "French Fries"},
+      {"id": "dosa", "label": "Benne Dosa"},
+      {"id": "sandwiches", "label": "Sandwiches"},
+      {"id": "momos", "label": "Momos"},
+      {"id": "spring-rolls", "label": "Spring Rolls"},
+      {"id": "beverages-combos", "label": "Beverages & Combos"},
+      {"id": "extras", "label": "Extras"}
     ],
     menu: [
-      { id: 'pav-bhaji-half', category: 'pav-bhaji', name: 'Pav Bhaji Half', price: 60, desc: 'Pav Bhaji', image: 'images/bhaji-items/pav-bhaji-half.jfif' },
-      { id: 'pav-bhaji-full', category: 'pav-bhaji', name: 'Pav Bhaji Full', price: 110, desc: 'Pav Bhaji', image: 'images/bhaji-items/pav-bhaji-full.jfif', popular: true },
-      { id: 'cheese-pav-bhaji-half', category: 'pav-bhaji', name: 'Cheese Pav Bhaji Half', price: 80, desc: 'Pav Bhaji', image: 'images/bhaji-items/cheese-pav-bhaji-half.jfif' },
-      { id: 'cheese-pav-bhaji-full', category: 'pav-bhaji', name: 'Cheese Pav Bhaji Full', price: 140, desc: 'Pav Bhaji', image: 'images/bhaji-items/cheese-pav-bhaji-full.jfif', popular: true },
-      { id: 'paneer-pav-bhaji-half', category: 'pav-bhaji', name: 'Paneer Pav Bhaji Half', price: 80, desc: 'Pav Bhaji', image: 'images/bhaji-items/paneer-pav-bhaji-half.jfif' },
-      { id: 'paneer-pav-bhaji-full', category: 'pav-bhaji', name: 'Paneer Pav Bhaji Full', price: 140, desc: 'Pav Bhaji', image: 'images/bhaji-items/paneer-pav-bhaji-full.jfif' },
-      { id: 'cheese-paneer-pav-bhaji-half', category: 'pav-bhaji', name: 'Cheese Paneer Pav Bhaji Half', price: 100, desc: 'Pav Bhaji', image: 'images/bhaji-items/cheese-paneer-pav-bhaji-half.jfif' },
-      { id: 'cheese-paneer-pav-bhaji-full', category: 'pav-bhaji', name: 'Cheese Paneer Pav Bhaji Full', price: 180, desc: 'Pav Bhaji', image: 'images/bhaji-items/cheese-paneer-pav-bhaji-full.jfif' },
-      { id: 'aloo-tikki-burger', category: 'burgers', name: 'Aloo Tikki Burger', price: 50, desc: 'Burger', image: 'images/bhaji-items/aloo-tikki-burger.jfif' },
-      { id: 'aloo-tikki-cheese-burger', category: 'burgers', name: 'Aloo Tikki Cheese Burger', price: 70, desc: 'Burger', image: 'images/bhaji-items/aloo-tikki-cheese-burger.jfif', popular: true },
-      { id: 'fries', category: 'fries', name: 'Fries', price: 40, desc: 'Crispy fries', image: 'images/bhaji-items/fries.jfif' },
-      { id: 'peri-peri-fries', category: 'fries', name: 'Peri Peri Fries', price: 50, desc: 'Crispy fries', image: 'images/bhaji-items/peri-peri-fries.jfif' },
-      { id: 'cheese-fries', category: 'fries', name: 'Cheese Fries', price: 60, desc: 'Crispy fries', image: 'images/bhaji-items/cheese-fries.jfif' },
-      { id: 'cheese-peri-peri-fries', category: 'fries', name: 'Cheese Peri Peri Fries', price: 70, desc: 'Crispy fries', image: 'images/bhaji-items/cheese-peri-peri-fries.jfif', popular: true },
-      { id: 'veg-grilled-sandwich', category: 'sandwiches', name: 'Veg Grilled Sandwich', price: 50, desc: 'Grilled sandwich', image: 'images/bhaji-items/veg-grilled-sandwich.jfif' },
-      { id: 'veg-cheese-sandwich', category: 'sandwiches', name: 'Veg Cheese Sandwich', price: 70, desc: 'Grilled sandwich', image: 'images/bhaji-items/veg-cheese-sandwich.jfif' },
-      { id: 'corn-cheese-sandwich', category: 'sandwiches', name: 'Corn Cheese Sandwich', price: 70, desc: 'Grilled sandwich', image: 'images/bhaji-items/corn-cheese-sandwich.jfif', popular: true },
-      { id: 'hara-bhara-kabab', category: 'snacks', name: 'Hara Bhara Kabab', price: 60, desc: 'Snack', image: 'images/bhaji-items/hara-bhara-kabab.jfif' },
-      { id: 'veg-momos', category: 'snacks', name: 'Veg Momos', price: 50, desc: 'Momos', image: 'images/bhaji-items/veg-momos.jfif' },
-      { id: 'paneer-momos', category: 'snacks', name: 'Paneer Momos', price: 70, desc: 'Momos', image: 'images/bhaji-items/paneer-momos.jfif' },
-      { id: 'plain-benne-dosa', category: 'dosa', name: 'Plain Benne Dosa', price: 40, desc: 'Benne Dosa', image: 'images/bhaji-items/plain-benne-dosa.jfif' },
-      { id: 'masala-benne-dosa', category: 'dosa', name: 'Masala Benne Dosa', price: 50, desc: 'Benne Dosa', image: 'images/bhaji-items/masala-benne-dosa.jfif' },
-      { id: 'cheese-benne-dosa', category: 'dosa', name: 'Cheese Benne Dosa', price: 60, desc: 'Benne Dosa', image: 'images/bhaji-items/cheese-benne-dosa.jfif' },
-      { id: 'cheese-masala-benne-dosa', category: 'dosa', name: 'Cheese Masala Benne Dosa', price: 70, desc: 'Benne Dosa', image: 'images/bhaji-items/cheese-masala-benne-dosa.jfif', popular: true },
-      { id: 'cold-coffee', category: 'drinks', name: 'Cold Coffee', price: 70, desc: 'Cold coffee', image: 'images/bhaji-items/cold-coffee.jfif' },
-      { id: 'masala-lemonade', category: 'drinks', name: 'Masala Lemonade', price: 30, desc: 'Refreshing drink', image: 'images/bhaji-items/masala-lemonade.jfif' },
-      { id: 'blue-lagoon', category: 'drinks', name: 'Blue Lagoon', price: 70, desc: 'Refreshing drink', image: 'images/bhaji-items/blue-lagoon.jfif', popular: true },
-      { id: 'kala-khatta', category: 'drinks', name: 'Kala Khatta', price: 60, desc: 'Refreshing drink', image: 'images/bhaji-items/kala-khatta.jfif' },
-      { id: 'watermelon-special', category: 'drinks', name: 'Watermelon Special', price: 60, desc: 'Refreshing drink', image: 'images/bhaji-items/watermelon-special.jfif' },
-      { id: 'virgin-mojito', category: 'drinks', name: 'Virgin Mojito', price: 60, desc: 'Refreshing drink', image: 'images/bhaji-items/virgin-mojito.jfif', popular: true }
+      {"id": "pav-bhaji-half", "category": "pav-bhaji", "name": "Pav Bhaji Half", "price": 60, "image": "images/bhaji-items/pav-bhaji-half.jfif", "desc": "", "popular": true},
+      {"id": "pav-bhaji-full", "category": "pav-bhaji", "name": "Pav Bhaji Full", "price": 110, "image": "images/bhaji-items/pav-bhaji-half.jfif", "desc": "", "popular": true},
+      {"id": "cheese-pav-bhaji-half", "category": "pav-bhaji", "name": "Cheese Pav Bhaji Half", "price": 80, "image": "images/bhaji-items/cheese-pav-bhaji-half.jfif", "desc": "", "popular": true},
+      {"id": "cheese-pav-bhaji-full", "category": "pav-bhaji", "name": "Cheese Pav Bhaji Full", "price": 140, "image": "images/bhaji-items/cheese-pav-bhaji-half.jfif", "desc": "", "popular": true},
+      {"id": "paneer-pav-bhaji-half", "category": "pav-bhaji", "name": "Paneer Pav Bhaji Half", "price": 80, "image": "images/bhaji-items/paneer-pav-bhaji-half.jfif", "desc": "", "popular": false},
+      {"id": "paneer-pav-bhaji-full", "category": "pav-bhaji", "name": "Paneer Pav Bhaji Full", "price": 140, "image": "images/bhaji-items/paneer-pav-bhaji-half.jfif", "desc": "", "popular": false},
+      {"id": "cheese-paneer-pav-bhaji-half", "category": "pav-bhaji", "name": "Cheese Paneer Pav Bhaji Half", "price": 100, "image": "images/bhaji-items/cheese-paneer-pav-bhaji-half.jfif", "desc": "", "popular": false},
+      {"id": "cheese-paneer-pav-bhaji-full", "category": "pav-bhaji", "name": "Cheese Paneer Pav Bhaji Full", "price": 180, "image": "images/bhaji-items/cheese-paneer-pav-bhaji-half.jfif", "desc": "", "popular": false},
+      {"id": "aloo-tikki-burger", "category": "burgers", "name": "Veg Aloo Tikki Burger", "price": 60, "image": "images/bhaji-items/aloo-tikki-burger.jfif", "desc": "Served with two types of sauces/dip."},
+      {"id": "aloo-tikki-cheese-burger", "category": "burgers", "name": "Cheese Cream Aloo Tikki Burger", "price": 70, "image": "images/bhaji-items/aloo-tikki-cheese-burger.jfif", "desc": "Served with three types of sauces/dip."},
+      {"id": "fries-classic", "category": "fries", "name": "Plain - Salted Fries Classic", "price": 40, "image": "images/bhaji-items/fries.jfif", "desc": ""},
+      {"id": "fries-jumbo", "category": "fries", "name": "Plain - Salted Fries Jumbo", "price": 70, "image": "images/bhaji-items/fries.jfif", "desc": ""},
+      {"id": "peri-peri-fries-classic", "category": "fries", "name": "Peri Peri Fries Classic", "price": 50, "image": "images/bhaji-items/peri-peri-fries.jfif", "desc": ""},
+      {"id": "peri-peri-fries-jumbo", "category": "fries", "name": "Peri Peri Fries Jumbo", "price": 90, "image": "images/bhaji-items/peri-peri-fries.jfif", "desc": ""},
+      {"id": "cheese-fries-classic", "category": "fries", "name": "Cheesy Fries Classic", "price": 60, "image": "images/bhaji-items/cheese-fries.jfif", "desc": ""},
+      {"id": "cheese-fries-jumbo", "category": "fries", "name": "Cheesy Fries Jumbo", "price": 110, "image": "images/bhaji-items/cheese-fries.jfif", "desc": ""},
+      {"id": "cheese-peri-peri-fries-classic", "category": "fries", "name": "Peri Peri Cheesy Fries Classic", "price": 70, "image": "images/bhaji-items/cheese-peri-peri-fries.jfif", "desc": ""},
+      {"id": "cheese-peri-peri-fries-jumbo", "category": "fries", "name": "Peri Peri Cheesy Fries Jumbo", "price": 120, "image": "images/bhaji-items/cheese-peri-peri-fries.jfif", "desc": ""},
+      {"id": "plain-dosa", "category": "dosa", "name": "Plain Dosa", "price": 49, "image": "images/bhaji-items/plain-benne-dosa.jfif", "desc": "Served with two types of chutney only."},
+      {"id": "classic-dosa", "category": "dosa", "name": "Classic Dosa", "price": 59, "image": "images/bhaji-items/plain-benne-dosa.jfif", "desc": "Served with two types of chutney only."},
+      {"id": "butter-benne-dosa", "category": "dosa", "name": "Butter Benne Dosa", "price": 79, "image": "images/bhaji-benne-dosa.webp", "desc": "Served with two types of chutney only."},
+      {"id": "pure-ghee-benne-dosa", "category": "dosa", "name": "Pure Ghee Benne Dosa", "price": 99, "image": "images/bhaji-items/plain-benne-dosa.jfif", "desc": "Served with two types of chutney only."},
+      {"id": "pizza-dosa", "category": "dosa", "name": "Pizza Dosa", "price": 79, "image": "images/bhaji-pizza-dosa.webp", "desc": "Served with two types of chutney only."},
+      {"id": "veg-grilled-sandwich-classic", "category": "sandwiches", "name": "Vegetable Grilled Sandwich Classic", "price": 50, "image": "images/bhaji-items/veg-grilled-sandwich.jfif", "desc": ""},
+      {"id": "veg-grilled-sandwich-jumbo", "category": "sandwiches", "name": "Vegetable Grilled Sandwich Jumbo", "price": 99, "image": "images/bhaji-items/veg-grilled-sandwich.jfif", "desc": ""},
+      {"id": "peri-peri-veg-grilled-sandwich-classic", "category": "sandwiches", "name": "Peri Peri Vegetable Grilled Sandwich Classic", "price": 60, "image": "images/bhaji-items/veg-grilled-sandwich.jfif", "desc": ""},
+      {"id": "peri-peri-veg-grilled-sandwich-jumbo", "category": "sandwiches", "name": "Peri Peri Vegetable Grilled Sandwich Jumbo", "price": 109, "image": "images/bhaji-items/veg-grilled-sandwich.jfif", "desc": ""},
+      {"id": "corn-cheese-grilled-sandwich-classic", "category": "sandwiches", "name": "Corn Cheese Grilled Sandwich Classic", "price": 70, "image": "images/bhaji-items/corn-cheese-sandwich.jfif", "desc": ""},
+      {"id": "corn-cheese-grilled-sandwich-jumbo", "category": "sandwiches", "name": "Corn Cheese Grilled Sandwich Jumbo", "price": 119, "image": "images/bhaji-items/corn-cheese-sandwich.jfif", "desc": ""},
+      {"id": "paneer-grilled-sandwich-classic", "category": "sandwiches", "name": "Paneer Grilled Sandwich Classic", "price": 70, "image": "images/bhaji-items/veg-grilled-sandwich.jfif", "desc": ""},
+      {"id": "paneer-grilled-sandwich-jumbo", "category": "sandwiches", "name": "Paneer Grilled Sandwich Jumbo", "price": 119, "image": "images/bhaji-items/veg-grilled-sandwich.jfif", "desc": ""},
+      {"id": "veg-steam-momos-half", "category": "momos", "name": "Veg Steam Momos Half", "price": 25, "image": "images/bhaji-items/veg-momos.jfif", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "veg-steam-momos-full", "category": "momos", "name": "Veg Steam Momos Full", "price": 50, "image": "images/bhaji-items/veg-momos.jfif", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "veg-fried-momos-half", "category": "momos", "name": "Veg Fried Momos Half", "price": 30, "image": "images/bhaji-veg-fried-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "veg-fried-momos-full", "category": "momos", "name": "Veg Fried Momos Full", "price": 60, "image": "images/bhaji-veg-fried-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "paneer-steam-momos-half", "category": "momos", "name": "Paneer Steam Momos Half", "price": 35, "image": "images/bhaji-items/paneer-momos.jfif", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "paneer-steam-momos-full", "category": "momos", "name": "Paneer Steam Momos Full", "price": 70, "image": "images/bhaji-items/paneer-momos.jfif", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "paneer-fried-momos-half", "category": "momos", "name": "Paneer Fried Momos Half", "price": 40, "image": "images/bhaji-paneer-fried-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "paneer-fried-momos-full", "category": "momos", "name": "Paneer Fried Momos Full", "price": 80, "image": "images/bhaji-paneer-fried-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "cheese-corn-steam-momos-half", "category": "momos", "name": "Cheese Corn Steam Momos Half", "price": 40, "image": "images/bhaji-items/veg-momos.jfif", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "cheese-corn-steam-momos-full", "category": "momos", "name": "Cheese Corn Steam Momos Full", "price": 80, "image": "images/bhaji-items/veg-momos.jfif", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "cheese-corn-fried-momos-half", "category": "momos", "name": "Cheese Corn Fried Momos Half", "price": 50, "image": "images/bhaji-paneer-fried-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "cheese-corn-fried-momos-full", "category": "momos", "name": "Cheese Corn Fried Momos Full", "price": 90, "image": "images/bhaji-paneer-fried-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "jhol-momos-half", "category": "momos", "name": "Jhol Momos Half", "price": 40, "image": "images/bhaji-jhol-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "jhol-momos-full", "category": "momos", "name": "Jhol Momos Full", "price": 80, "image": "images/bhaji-jhol-momos.webp", "desc": "Pan-fried momos available on request, subject to availability."},
+      {"id": "vegetable-spring-rolls", "category": "spring-rolls", "name": "Vegetable Spring Rolls", "price": 30, "image": "images/bhaji-spring-rolls.webp", "desc": ""},
+      {"id": "cheese-corn-spring-rolls", "category": "spring-rolls", "name": "Cheese Corn Spring Rolls", "price": 50, "image": "images/bhaji-spring-rolls.webp", "desc": ""},
+      {"id": "chai-veg-spring-roll", "category": "beverages-combos", "name": "Chai + Veg Spring Roll", "price": 40, "image": "images/bhaji-spring-rolls.webp", "desc": ""},
+      {"id": "chai-fries", "category": "beverages-combos", "name": "Chai + Fries", "price": 50, "image": "images/bhaji-items/fries.jfif", "desc": ""},
+      {"id": "chai-veg-momo", "category": "beverages-combos", "name": "Chai + Veg Momo", "price": 40, "image": "images/bhaji-veg-fried-momos.webp", "desc": ""},
+      {"id": "hot-chocolate-regular", "category": "beverages-combos", "name": "Hot Chocolate (Regular)", "price": 60, "image": "images/bhaji-hot-chocolate.webp", "desc": ""},
+      {"id": "hot-chocolate-large", "category": "beverages-combos", "name": "Hot Chocolate (Large)", "price": 100, "image": "images/bhaji-hot-chocolate.webp", "desc": ""},
+      {"id": "water", "category": "beverages-combos", "name": "Water", "price": null, "image": "images/bhaji.jpg", "desc": "Available at MRP. Please ask the outlet for the current price.", "priceLabel": "MRP"},
+      {"id": "cold-drink", "category": "beverages-combos", "name": "Cold Drink", "price": null, "image": "images/bhaji.jpg", "desc": "Available at MRP. Please ask the outlet for the current price.", "priceLabel": "MRP"},
+      {"id": "additional-sauce-dip", "category": "extras", "name": "Additional Sauce/Dip", "price": 15, "image": "images/bhaji.jpg", "desc": "Additional sauce/dip for sandwiches or burgers."}
     ]
   },
   baithak: {
@@ -267,7 +294,7 @@ if (!config) {
   const storageKey = `streetfoods-cart-${outletKey}`;
   const savedCart = JSON.parse(localStorage.getItem(storageKey) || 'null');
   const cart = new Map(
-    savedCart?.items?.map(item => {
+    savedCart?.items?.filter(item => config.menu.some(current => current.id === item.id && Number.isFinite(current.price))).map(item => {
       const currentItem = config.menu.find(menuItem => menuItem.id === item.id) || item;
       return [item.id, { ...currentItem, qty: item.qty }];
     }) || []
@@ -336,12 +363,12 @@ if (!config) {
   }
 
   function getPortionInfo(item) {
-    const match = item.name.match(/\s+(Half|Full)$/i);
+    const match = item.name.match(/\s+(Half|Full|Classic|Jumbo)$/i);
     if (!match) return null;
 
     return {
       label: match[1][0].toUpperCase() + match[1].slice(1).toLowerCase(),
-      baseName: item.name.replace(/\s+(Half|Full)$/i, '')
+      baseName: item.name.replace(/\s+(Half|Full|Classic|Jumbo)$/i, '')
     };
   }
 
@@ -376,10 +403,10 @@ if (!config) {
       const portion = getPortionInfo(item);
       const key = portion ? `${item.category}|${portion.baseName.toLowerCase()}` : null;
       const group = key ? groups.get(key) : null;
-      const hasHalfFullPair = group?.variants.some(variant => variant.label === 'Half') &&
-        group?.variants.some(variant => variant.label === 'Full');
+      const hasSizePair = [['Half', 'Full'], ['Classic', 'Jumbo']].some(labels =>
+        labels.every(label => group?.variants.some(variant => variant.label === label)));
 
-      if (!portion || !hasHalfFullPair) {
+      if (!portion || !hasSizePair) {
         products.push({ id: item.id, name: item.name, desc: item.desc, diet: getItemDiet(item), item });
         return products;
       }
@@ -387,7 +414,7 @@ if (!config) {
       if (usedGroups.has(key)) return products;
 
       usedGroups.add(key);
-      group.variants.sort((a, b) => (a.label === 'Half' ? 0 : 1) - (b.label === 'Half' ? 0 : 1));
+      group.variants.sort((a, b) => (['Half', 'Classic'].includes(a.label) ? 0 : 1) - (['Half', 'Classic'].includes(b.label) ? 0 : 1));
       products.push(group);
       return products;
     }, []);
@@ -546,7 +573,7 @@ if (!config) {
     row.className = `menu-item${popular ? ' popular-item' : ''}`;
     row.innerHTML = `
       <div class="menu-image-wrap">
-        <img src="${item.image || 'images/hero.png'}" alt="${item.name}">
+        <img src="${item.image || 'images/hero.png'}" alt="${item.name}" loading="lazy" decoding="async">
         ${popular ? '<span class="popular-badge">Popular</span>' : ''}
       </div>
       <div class="menu-meta">
@@ -557,12 +584,12 @@ if (!config) {
         <p>${item.desc}</p>
         ${variantOptions}
         <div class="menu-bottom">
-          <span class="price">${rupee}${item.price}</span>
-          <div class="item-actions">
+          <span class="price">${item.priceLabel || `${rupee}${item.price}`}</span>
+          ${item.priceLabel ? '<span class="platform-note">Ask outlet for price</span>' : `<div class="item-actions">
             <button class="pill item-step" data-action="dec" data-id="${item.id}" aria-label="Remove ${item.name}" ${qty ? '' : 'disabled'}>-</button>
             <span class="qty">${qty}</span>
             <button class="pill primary add-btn" data-action="inc" data-id="${item.id}" aria-label="Add ${item.name}">+</button>
-          </div>
+          </div>`}
         </div>
       </div>
     `;
@@ -638,7 +665,7 @@ if (!config) {
 
   function updateQty(id, delta) {
     const item = config.menu.find(m => m.id === id);
-    if (!item) return;
+    if (!item || !Number.isFinite(item.price)) return;
 
     const existing = cart.get(id);
     const nextQty = (existing?.qty || 0) + delta;
