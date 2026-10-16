@@ -20,7 +20,7 @@ export default {
   if(request.method==='OPTIONS')return reply(request,{ok:true});
   if(!env.FEEDBACK_DB)return reply(request,{error:'Feedback storage is not ready.'},503);
   try {
-   if(!initialized)initialized=env.FEEDBACK_DB.exec(schema).catch(error=>{initialized=null;throw error});
+   if(!initialized)initialized=env.FEEDBACK_DB.batch(schema.split(';').map(sql=>sql.trim()).filter(Boolean).map(sql=>env.FEEDBACK_DB.prepare(sql))).catch(error=>{initialized=null;throw error});
    await initialized;
    if(path==='/api/testimonials' && request.method==='GET'){
     const {results}=await env.FEEDBACK_DB.prepare('SELECT name, review, outlet, created_at FROM feedback WHERE published = 1 ORDER BY created_at DESC LIMIT 6').all();
